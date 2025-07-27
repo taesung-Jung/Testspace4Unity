@@ -5,19 +5,23 @@ public class PlayerHealth : MonoBehaviour
     public int maxHp = 100;
     public int currentHp;
 
-    public float NodamageTime = 5.0f;
-    public float NodamageTimer = 0.0f;
+    public float NodamageTimer = 30.0f;
     public bool isDamaged = false;
 
-    void Start() { currentHp = maxHp; }
+    void Start()
+    {
+        currentHp = maxHp;
+        NodamageTimer = 30.0f;
+    }
 
     void Update()
     {
         if (isDamaged)
         {
-            NodamageTimer -= Time.deltaTime;
+            NodamageTimer -= 1.0f;
             if (NodamageTimer <= 0f)
             {
+                NodamageTimer = 30.0f;
                 isDamaged = false;
             }
         }
