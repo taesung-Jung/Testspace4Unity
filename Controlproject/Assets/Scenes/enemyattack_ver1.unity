@@ -189,16 +189,16 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4240824761258804541, guid: 6a0d0c32ef4b81d438b2f7806b418863, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 817718992}
+      addedObject: {fileID: 817718997}
     - targetCorrespondingSourceObject: {fileID: 4240824761258804541, guid: 6a0d0c32ef4b81d438b2f7806b418863, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 817718991}
+      addedObject: {fileID: 817718996}
     - targetCorrespondingSourceObject: {fileID: 4240824761258804541, guid: 6a0d0c32ef4b81d438b2f7806b418863, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 817718990}
+      addedObject: {fileID: 817718995}
     - targetCorrespondingSourceObject: {fileID: 4240824761258804541, guid: 6a0d0c32ef4b81d438b2f7806b418863, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 817718998}
+      addedObject: {fileID: 817718994}
   m_SourcePrefab: {fileID: 100100000, guid: 6a0d0c32ef4b81d438b2f7806b418863, type: 3}
 --- !u!1 &330585543
 GameObject:
@@ -463,7 +463,47 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4240824761258804541, guid: 6a0d0c32ef4b81d438b2f7806b418863, type: 3}
   m_PrefabInstance: {fileID: 250235506}
   m_PrefabAsset: {fileID: 0}
---- !u!54 &817718990
+--- !u!114 &817718994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 817718988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fb65e15d7b57874cb89089ce5537e70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTag: Player
+  walkSpeed: 2.8
+  runSpeed: 5
+  idleTime: {x: 0.8, y: 2}
+  turnSpeedDegPerSec: 240
+  moveMinDistance: 4
+  moveMaxDistance: 8
+  sampleMaxDistance: 2
+  stuckRepathTime: 2
+  roamRadius: 15
+  waypointTolerance: 0.5
+  stopDistance: 1.5
+  attackRange: 1.8
+  damage: 15
+  attackOrigin: {fileID: 0}
+  hitRadius: 0.8
+  targetLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  attackAnimSpeed: 1
+  nextAttackDelay: 0.35
+  animator: {fileID: 0}
+  walkBool: isWalking
+  runBool: isRunning
+  attackBool: isAttacking
+  attackBoolPulse: 0.08
+  detectRadius: 6
+  detectCenter: {x: 0, y: 0, z: 0}
+--- !u!54 &817718995
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -490,8 +530,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &817718991
-BoxCollider:
+--- !u!135 &817718996
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -509,9 +549,9 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 2, z: 10}
-  m_Center: {x: 0, y: 1, z: 0}
---- !u!195 &817718992
+  m_Radius: 6
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!195 &817718997
 NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -521,8 +561,8 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 2.5
-  m_Acceleration: 5
+  m_Speed: 3.5
+  m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
@@ -533,46 +573,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!95 &817718993 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 5411550980689552667, guid: 6a0d0c32ef4b81d438b2f7806b418863, type: 3}
-  m_PrefabInstance: {fileID: 250235506}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &817718998
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 817718988}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d52c0b95e534a0045b5dcc2fbc8634a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerTag: Player
-  idleTime: {x: 0.8, y: 2}
-  turnSpeedDegPerSec: 240
-  moveMinDistance: 4
-  moveMaxDistance: 8
-  sampleMaxDistance: 2
-  stuckRepathTime: 2
-  roamRadius: 15
-  waypointTolerance: 0.5
-  stopDistance: 1.5
-  attackRange: 1.8
-  attackCooldown: 1.2
-  damage: 15
-  attackOrigin: {fileID: 1459256930}
-  hitRadius: 0.8
-  targetLayers:
-    serializedVersion: 2
-    m_Bits: 256
-  animator: {fileID: 817718993}
-  walkBool: isWalking
-  runBool: isRunning
-  attackBool: isAttacking
-  attackBoolPulse: 0.08
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -764,11 +764,6 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 969532a3f94422547a1dd4462ed0723d, type: 2}
   m_BuildHeightMesh: 0
---- !u!4 &1459256930 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2256815163010284886, guid: 6a0d0c32ef4b81d438b2f7806b418863, type: 3}
-  m_PrefabInstance: {fileID: 250235506}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1934751335 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4150780873371026577, guid: a6d4bbf43b02bc64692932784e65fd7c, type: 3}
