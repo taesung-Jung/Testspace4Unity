@@ -653,7 +653,6 @@ GameObject:
   - component: {fileID: 1171440221}
   - component: {fileID: 1171440224}
   - component: {fileID: 1171440223}
-  - component: {fileID: 1171440222}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -680,27 +679,6 @@ Transform:
   - {fileID: 800489364}
   m_Father: {fileID: 2067296242}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1171440222
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1171440220}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c3080cc9d24a4a4d806a5d0587675f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnPoints:
-  - {fileID: 1501848601}
-  - {fileID: 1643888697}
-  - {fileID: 1820488064}
-  - {fileID: 800489364}
-  monsterTypes: 000000000100000002000000
-  minimumMonsters: 5
-  maxMonsters: 20
-  currentMonsterCount: 0
 --- !u!23 &1171440223
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -766,6 +744,7 @@ GameObject:
   - component: {fileID: 1501848604}
   - component: {fileID: 1501848603}
   - component: {fileID: 1501848602}
+  - component: {fileID: 1501848605}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -862,6 +841,24 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1501848600}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1501848605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1501848600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c3080cc9d24a4a4d806a5d0587675f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPoint: {fileID: 0}
+  monsterTypes: 000000000100000002000000
+  maxMonsters: 40
+  deathMonsters: 20
+  currentMonsterCount: 0
+  randomRange: 2
 --- !u!1 &1643888696
 GameObject:
   m_ObjectHideFlags: 0
@@ -1107,8 +1104,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec77c327fd5546d4c8c05f60f383c30c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dungeonLevel: 0
+  timer: 0
+  wave: 0
+  isDungeon: 0
   pool: {fileID: 975456785}
+  spawner: {fileID: 0}
 --- !u!4 &2067296242
 Transform:
   m_ObjectHideFlags: 0
