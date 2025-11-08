@@ -34,6 +34,7 @@ public class enemyattack5 : MonoBehaviour
     public Transform attackOrigin;
     public float hitRadius = 0.8f;
     public LayerMask targetLayers;
+     public GameObject attackVfx;
 
     [Header("공격 속도 제어")]
     [Tooltip("공격 중에만 적용되는 애니메이션 속도 배수 (1 = 기본속도)")]
@@ -53,6 +54,9 @@ public class enemyattack5 : MonoBehaviour
     [Min(0.01f)]
     public float detectRadius = 6f;
     public Vector3 detectCenter = Vector3.zero;
+
+    [Header("공격 이펙트")]
+    public GameObject attackVfxPrefab;
 
     private enum State { Wander, Chase, Attack }
     private State state = State.Wander;
@@ -238,8 +242,18 @@ public class enemyattack5 : MonoBehaviour
         if (attackTimer <= 0f)
         {
             attackBoolTimer = attackBoolPulse;
-            DealDamage();
+            SpawnAttack();
             attackTimer = Mathf.Max(0f, nextAttackDelay);
+        }
+    }
+    // ========================= 공격 생성 =========================
+    void SpawnAttack()
+    {
+        if (attackVfxPrefab && attackOrigin)
+        {
+            attackVfx = Instantiate(attackVfxPrefab, attackOrigin.position, attackOrigin.rotation);
+            Attack attack = attackVfx.GetComponent<Attack>();
+            attackVfx.transform.SetParent(transform, worldPositionStays: attack.isRanged);
         }
     }
 
@@ -262,22 +276,6 @@ public class enemyattack5 : MonoBehaviour
         float targetAnimSpeed = (state == State.Attack) ? Mathf.Max(0.01f, attackAnimSpeed) : 1f;
         if (Mathf.Abs(animator.speed - targetAnimSpeed) > 0.0001f)
             animator.speed = targetAnimSpeed;
-    }
-
-    // ========================= 대미지 판정 =========================
-    public void DealDamage()
-    {
-        Vector3 pos = attackOrigin ? attackOrigin.position :
-                       transform.position + transform.forward * (attackRange * 0.5f);
-
-        int mask = (targetLayers.value == 0) ? ~0 : targetLayers.value;
-        Collider[] cols = Physics.OverlapSphere(pos, hitRadius, mask, QueryTriggerInteraction.Ignore);
-        for (int i = 0; i < cols.Length; i++)
-        {
-            Collider col = cols[i];
-            if (!col.CompareTag(playerTag)) continue;
-            col.SendMessageUpwards("TakeDamage", damage, SendMessageOptions.DontRequireReceiver);
-        }
     }
 
     // ========================= 트리거 탐지 =========================

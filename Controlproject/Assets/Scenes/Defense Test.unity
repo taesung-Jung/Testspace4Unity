@@ -362,6 +362,7 @@ GameObject:
   - component: {fileID: 1282309732}
   - component: {fileID: 1282309731}
   - component: {fileID: 1282309730}
+  - component: {fileID: 1282309735}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Player
@@ -486,6 +487,25 @@ Transform:
   - {fileID: 1542732124}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1282309735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1282309729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38f6479b25f22f6408da1f6c2557a4b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defenseArea: {fileID: 1542732123}
+  isAttacking: 0
+  isDefending: 0
+  isColliding: 0
+  maxStamina: 0
+  stamina: 0
+  staminaRegenRate: 0
 --- !u!1 &1542732123
 GameObject:
   m_ObjectHideFlags: 0
