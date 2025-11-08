@@ -3,49 +3,58 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class PlayerAnimatorController : MonoBehaviour
 {
-    public Transform cameraTransform; // 주로 Main Camera
+    public Transform cameraTransform;
     private Animator animator;
-    private CharacterController controller;
 
     void Start()
     {
         animator = GetComponent<Animator>();
-        controller = GetComponent<CharacterController>();
     }
 
     void Update()
     {
-        // 입력
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
-        Vector3 inputDir = new Vector3(h, 0, v).normalized;
 
-        // 이동 여부 판단
+        Vector2 inputDir = new Vector2(h, v).normalized;
         bool isMoving = inputDir.magnitude > 0.1f;
-        animator.SetBool("IsMoving", isMoving);
+        animator.SetBool("isMoving", isMoving);
 
         if (isMoving)
         {
-            // 카메라 기준 방향 계산
-            Vector3 camForward = cameraTransform.forward;
-            Vector3 camRight = cameraTransform.right;
-            camForward.y = 0;
-            camRight.y = 0;
-            camForward.Normalize();
-            camRight.Normalize();
+            // 4방향 전용: x/y 기준값 분리
+            float MoveX = Mathf.Abs(h) > Mathf.Abs(v) ? Mathf.Sign(h) : 0;
+            float MoveY = Mathf.Abs(v) > Mathf.Abs(h) ? Mathf.Sign(v) : 0;
 
-            Vector3 worldDir = (camForward * v + camRight * h).normalized;
-
-            // 캐릭터 로컬 기준으로 변환
-            Vector3 localDir = transform.InverseTransformDirection(worldDir);
-
-            animator.SetFloat("MoveX", localDir.x);
-            animator.SetFloat("MoveY", localDir.z);
+            animator.SetFloat("MoveX", MoveX);
+            animator.SetFloat("MoveY", MoveY);
         }
         else
         {
             animator.SetFloat("MoveX", 0f);
             animator.SetFloat("MoveY", 0f);
         }
+
+        // 마우스 입력
+        bool isMouse;
+        bool isAttack = false;
+
+        if (Input.GetMouseButtonDown(0)) // 좌클릭
+        {
+            isMouse = true;
+            isAttack = true; // 공격
+        }
+        else if (Input.GetMouseButtonDown(1)) // 우클릭
+        {
+            isMouse = true;
+            isAttack = false; // 방어
+        }
+        else
+        {
+            isMouse = false;
+        }
+
+        animator.SetBool("isMouse", isMouse);
+        animator.SetBool("isAttack", isAttack);
     }
 }
