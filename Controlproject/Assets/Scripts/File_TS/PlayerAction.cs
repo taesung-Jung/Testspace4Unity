@@ -1,7 +1,18 @@
 using UnityEngine;
+using System.Collections;
 
 public class PlayerAction : MonoBehaviour
 {
+    public Transform cameraTransform;
+    private Animator animator;
+    private Coroutine attackCoroutine;
+    private Coroutine defenseCoroutine;
+    
+    void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
+
     void Update()
     {
             if (Input.GetKeyDown(KeyCode.Q))
@@ -33,3 +44,4 @@ public class PlayerAction : MonoBehaviour
         }
     }
 }
+

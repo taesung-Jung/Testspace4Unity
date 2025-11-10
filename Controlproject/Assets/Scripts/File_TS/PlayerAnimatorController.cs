@@ -1,4 +1,7 @@
 using UnityEngine;
+using System.Threading;
+using System;
+
 
 [RequireComponent(typeof(Animator))]
 public class PlayerAnimatorController : MonoBehaviour
@@ -36,25 +39,13 @@ public class PlayerAnimatorController : MonoBehaviour
         }
 
         // 마우스 입력
-        bool isMouse;
-        bool isAttack = false;
-
         if (Input.GetMouseButtonDown(0)) // 좌클릭
         {
-            isMouse = true;
-            isAttack = true; // 공격
+            animator.SetTrigger("Attack"); // 공격
         }
         else if (Input.GetMouseButtonDown(1)) // 우클릭
         {
-            isMouse = true;
-            isAttack = false; // 방어
+            animator.SetTrigger("Defence"); // 방어
         }
-        else
-        {
-            isMouse = false;
-        }
-
-        animator.SetBool("isMouse", isMouse);
-        animator.SetBool("isAttack", isAttack);
     }
 }
