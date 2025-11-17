@@ -34,7 +34,7 @@ public class enemyattack5 : MonoBehaviour
     public Transform attackOrigin;
     public float hitRadius = 0.8f;
     public LayerMask targetLayers;
-     public GameObject attackVfx;
+    public GameObject attackVfx;
 
     [Header("공격 속도 제어")]
     [Tooltip("공격 중에만 적용되는 애니메이션 속도 배수 (1 = 기본속도)")]
@@ -243,7 +243,7 @@ public class enemyattack5 : MonoBehaviour
         {
             attackBoolTimer = attackBoolPulse;
             SpawnAttack();
-            attackTimer = Mathf.Max(0f, nextAttackDelay);
+            attackTimer = Mathf.Max(0f,nextAttackDelay);
         }
     }
     // ========================= 공격 생성 =========================
@@ -251,7 +251,7 @@ public class enemyattack5 : MonoBehaviour
     {
         if (attackVfxPrefab && attackOrigin)
         {
-            attackVfx = Instantiate(attackVfxPrefab, attackOrigin.position, attackOrigin.rotation);
+            attackVfx = Instantiate(attackVfxPrefab, attackOrigin.localPosition, attackOrigin.rotation);
             Attack attack = attackVfx.GetComponent<Attack>();
             attackVfx.transform.SetParent(transform, worldPositionStays: attack.isRanged);
         }

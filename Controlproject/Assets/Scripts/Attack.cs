@@ -5,23 +5,21 @@ public class Attack : MonoBehaviour
     public int damage = 10;
     public string playerTag = "Player";
     public bool isRanged = false;
+    public float timer = 0;
+    public float lifeTime;
 
     private Collider col;
 
     void Awake()
     {
         col = GetComponent<Collider>();
-        col.enabled = false;
     }
 
-    private void OnEnable()
-    {
-        col.enabled = true;
-    }
-
-    private void OnDisable()
-    {
-        col.enabled = false;
+    void Update(){
+        timer += Time.deltaTime;
+        if(timer >= lifeTime){
+            Destroy(this.gameObject);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
