@@ -251,9 +251,9 @@ public class enemyattack5 : MonoBehaviour
     {
         if (attackVfxPrefab && attackOrigin)
         {
-            attackVfx = Instantiate(attackVfxPrefab, attackOrigin.localPosition, attackOrigin.rotation);
+            attackVfx = Instantiate(attackVfxPrefab, attackOrigin.position, attackOrigin.rotation);
             Attack attack = attackVfx.GetComponent<Attack>();
-            attackVfx.transform.SetParent(transform, worldPositionStays: attack.isRanged);
+            
         }
     }
 
