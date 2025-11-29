@@ -7,6 +7,7 @@ public class Attack : MonoBehaviour
     public bool isRanged = false;
     public float timer = 0;
     public float lifeTime;
+    public float moveSpeed = 0;
 
     private Collider col;
 
@@ -19,6 +20,10 @@ public class Attack : MonoBehaviour
         timer += Time.deltaTime;
         if(timer >= lifeTime){
             Destroy(this.gameObject);
+        }
+        if (isRanged)
+        {
+           transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
         }
     }
 
