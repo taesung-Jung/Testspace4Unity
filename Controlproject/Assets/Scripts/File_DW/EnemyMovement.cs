@@ -6,6 +6,8 @@ public class EnemyMovement : MonoBehaviour
 {
     NavMeshAgent agent;
     public float attackRange = 1.5f;
+    public float wanderTimer = 0;
+    public float radius = 10;
 
 
     void Awake() => agent = GetComponent<NavMeshAgent>();
@@ -23,9 +25,34 @@ public class EnemyMovement : MonoBehaviour
 
     public void Wander()
     {
-        agent.isStopped = false;
-        // TODO: random wander target
+        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+        {
+            wanderTimer = 0f;
+        }
+
+        if (wanderTimer > 0f)
+        {
+            wanderTimer -= Time.deltaTime;
+            return;
+        }
+
+
+        wanderTimer = Random.Range(6f, 9f);
+
+
+
+        Vector3 center = transform.position;
+        Vector3 randomDir = center + Random.insideUnitSphere * radius;
+
+
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(randomDir, out hit, radius, NavMesh.AllAreas))
+        {
+            agent.isStopped = false;
+            agent.SetDestination(hit.position);
+        }
     }
+
 
 
     public void LookAt(Transform target)
